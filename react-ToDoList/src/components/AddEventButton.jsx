@@ -1,6 +1,6 @@
-const AddEventButton = () => {
+const AddEventButton = ({ handleClick }) => {
   return (
-    <div>
+    <div className="add-button" onClick={handleClick}>
       +
     </div>
   )

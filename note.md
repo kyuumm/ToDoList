@@ -98,29 +98,29 @@ events是所有的数据，使用useEffect监听events变化，执行updateEvent
 
 * 项目结构：
 
-&nbsp;	main jsx --导入App js
+ 	main jsx --导入App js
 
-&nbsp;			--样式文件index css
+ 			--样式文件index css
 
  	Appjs --导入EventBar、TaskBox
 
-&nbsp;			--样式文件App css 、event css 、 task css
+ 			--样式文件App css 、event css 、 task css
 
-&nbsp;	EventBar --样式文件event css
+ 	EventBar --样式文件event css
 
-&nbsp;			--AddEventButton jsx 添加新事件的按钮
+ 			--AddEventButton jsx 添加新事件的按钮
 
-&nbsp;	TaskBox --样式文件 task css
+ 	TaskBox --样式文件 task css
 
-&nbsp;			--Column jsx任务状态列，显示列标题，管理任务列表，拖放，添加新任务
+ 			--Column jsx任务状态列，显示列标题，管理任务列表，拖放，添加新任务
 
-&nbsp;				--样式文件task css
+ 				--样式文件task css
 
-&nbsp;					--AddTasjButton jsx 添加新任务的按钮
+ 					--AddTasjButton jsx 添加新任务的按钮
 
-&nbsp;				--Task jsx 单个子任务的组件，显示任务，编辑，拖拽，删除
+ 				--Task jsx 单个子任务的组件，显示任务，编辑，拖拽，删除
 
-&nbsp;					--task css
+ 					--task css
 
 
 
@@ -134,11 +134,11 @@ App.jsx
 
 └── TaskBox.jsx
 
-&nbsp;  		 └── Column.jsx
+   		 └── Column.jsx
 
-&nbsp;     				  ├── Task.jsx
+      				  ├── Task.jsx
 
-&nbsp;   			          └── AddTaskButton.jsx
+    			          └── AddTaskButton.jsx
 
 
 
@@ -151,4 +151,12 @@ setEvents：更新事件数据的函数
 currentEvent：当前选中的事件
 
 setCurrentEvent：更新当前事件的函数
+
+##### **DAY3**
+
+initevent，设置默认值
+
+events用state管理，初始时判断localStorage有无，有-》JSON parse获取，无-》initevent用初始值
+
+写了updateEvents
 

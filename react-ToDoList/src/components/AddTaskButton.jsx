@@ -1,6 +1,6 @@
-const AddTaskButton = () => {
+const AddTaskButton = ({ handleClick }) => {
   return (
-    <div>
+    <div className="add-button" onClick={handleClick}>
       +
     </div>
   )

@@ -1,9 +1,9 @@
 import Column from "./Column";
 
-const TaskBox = () => {
+const TaskBox = ({ events, setEvents }) => {
 
   return (
-    <div>this is TaskBox</div>
+    <div className="task-box">this is TaskBox</div>
   )
 }
 export default TaskBox;

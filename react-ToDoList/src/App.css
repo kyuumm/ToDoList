@@ -4,3 +4,53 @@
   padding: 2rem;
   text-align: center;
 }
+
+.App {
+  display: flex;
+}
+
+.event-bar {
+  text-align: center;
+  flex-shrink: 1;
+  /* 定义了项目的收缩比例
+  当容器空间不足时，该元素会按比例收缩
+  值为1表示允许收缩，0表示不允许收缩
+  这里设置1是为了在窗口变窄时，事件栏可以适当收缩以适应布局 */
+  width: 300px;
+  height: 100vh;
+  /* vh是视口高度（Viewport Height）单位
+  1vh等于视口高度的1%
+  100vh表示元素高度等于整个视口的高度
+  这里确保事件栏始终占满整个屏幕高度 */
+  min-width: 220px;
+  border-right: 2px solid #efefef;
+}
+
+.task-box {
+  background-color: #f3f3f3;
+  min-width: 1000px;
+  flex: 1;
+}
+
+/* 观看flex视频 */
+.add-button {
+  width: 80%;
+  height: 45px;
+  line-height: 45px;
+  /* 
+  line-height影响的是文本在垂直方向上的位置
+  text-align:center影响水平对齐方式
+  */
+  color: white;
+  background-color: #ffcb53;
+  font-size: 2em;
+  cursor: pointer;
+  /* transition: 0.5s; */
+  border-radius: 10px;
+
+
+}
+
+.add-button:hover {
+  background-color: #f7e2b0;
+}
