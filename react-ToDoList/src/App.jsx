@@ -1,5 +1,7 @@
 import { useEffect, useState, useMemo, useCallback } from 'react'
 import './App.css'
+import './components/event.css';
+import './components/task.css'
 import TaskBox from './components/TaskBox'
 import EventBar from './components/EventBar'
 
@@ -53,7 +55,7 @@ function App() {
   }, [events])
 
   return (
-    <div>
+    <div className='App'>
       <EventBar events={events} setEvents={setEvents} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
       <TaskBox events={events} setEvents={setEvents} currentEvent={currentEvent} setCurrentEvent={setCurrentEvent} />
     </div>

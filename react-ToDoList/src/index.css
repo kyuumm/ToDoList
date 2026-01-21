@@ -87,7 +87,7 @@ video {
   vertical-align: baseline;
 }
 
-:root {
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -104,13 +104,6 @@ video {
 
 
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
 
 
 @media (prefers-color-scheme: light) {
@@ -119,11 +112,4 @@ body {
     background-color: #ffffff;
   }
 
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
-}
+} */

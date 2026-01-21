@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import AddEventButton from "./AddEventButton";
-import './event.css'
 
 const EventBar = ({ events, setEvents, currentEvent, setCurrentEvent }) => {
 

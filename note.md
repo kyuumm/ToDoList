@@ -160,3 +160,151 @@ events用state管理，初始时判断localStorage有无，有-》JSON parse获�
 
 写了updateEvents
 
+
+
+##### DAY4
+
+拖拽组件
+
+npm install react-beautiful-dnd --save
+
+react19版本冲突，使用18.2
+
+npm uninstall react react-dom
+
+npm install react@^18.2.0 react-dom@^18.2.0 --save
+
+
+
+* save的作用：没有 --save：包只会下载到本地 node\_modules 文件夹，但 package.json 不记录这个依赖；别人拿到你的项目，执行 npm install 时不会自动安装这个包。
+* 加了 --save：package.json 会记录依赖（比如 "react-beautiful-dnd": "^13.1.1"），其他人 / 部署环境执行 npm install 时，会自动下载这个包到项目中。
+
+
+
+* react-beautiful-dnd
+
+DragDropContext - 建立一個可 DnD 的範圍。
+
+&nbsp;	onDragStart
+
+&nbsp;	onDragUpdate
+
+&nbsp;	onDragEnd
+
+Droppable - 建立可以被拖曳放入的區塊。
+
+Draggalbe - 可被拖拉元件
+
+
+
+* 在App jsx入口中提前导入所有css文件，在之后的文件中不用分别导入了
+
+
+
+
+
+* 拖拽系统架构：
+
+
+
+使用了DragDropContext（在父组件TaskBox中）作为整个拖拽系统的上下文
+
+Droppable组件定义可放置区域
+
+Draggable组件定义可拖拽元素
+
+
+
+* ##### **ref**
+
+一种“直接访问真实 DOM 的通道”
+
+
+
+* provided 是 react-beautiful-dnd 注入的“拖拽控制对象”
+
+
+
+在 Draggable 场景下，provided 主要包含：
+
+
+
+provided = {
+
+&nbsp; innerRef,
+
+&nbsp; draggableProps,
+
+&nbsp; dragHandleProps
+
+}
+
+
+
+* **provided.innerRef**
+
+ref={provided.innerRef}
+
+作用：
+
+把 DOM 节点注册给 DnD 系统
+
+
+
+用于：
+
+计算拖拽元素的位置
+
+判断边界
+
+生成占位 placeholder
+
+* **provided.draggableProps**
+
+{...provided.draggableProps}
+
+作用：
+
+
+
+提供拖拽过程中需要的：
+
+
+
+style（transform、position）
+
+data 属性
+
+无障碍相关属性
+
+
+
+本质：
+
+告诉浏览 器：这个元素是“可被拖拽控制的”
+
+* **provided.dragHandleProps**
+
+{...provided.dragHandleProps}
+
+作用：
+
+指定“从哪里开始拖拽”
+
+
+
+现在的写法是：
+
+整个 Task 都可以拖
+
+
+
+* 使用 {} 表示代码块，需要显式使用 return 语句
+* 使用 () 表示隐式返回，直接返回后面的表达式
+
+
+
+
+
+
+
