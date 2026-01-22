@@ -28,16 +28,46 @@ const Column = ({ tag, currentEvent, events, setEvents }) => {
           }
         ]
       })
+      // // 同步更新currentEvent状态
+      // setCurrentEvent(arrCopy[index]);
+
       return arrCopy
     })
 
   }
-  const handleRemove = () => {
+  const handleRemove = (id, e) => {
+
+    // 禁止冒泡到上层:修改task
+    e.stopPropagation();
+
     console.log('remove');
+    console.log(id);
+
+    setEvents((prev) =>
+      prev.map((event) => {
+        if (event.title === currentEvent.title) {
+          /* const taskList = event[tag];
+          const index = taskList.findIndex((item) => item.id === id);
+          taskList.splice(index, 1);
+          return { ...event, [tag]: [...taskList] }; */
+          return {
+            ...event,
+            [tag]: event[tag].filter(item => item.id !== id)
+          };
+
+
+        } else {
+          return event;
+        }
+      })
+    )
+
 
   }
-  const handleUpdate = () => {
+  const handleUpdate = (id) => {
     console.log('update');
+
+
 
   }
 
@@ -57,10 +87,10 @@ const Column = ({ tag, currentEvent, events, setEvents }) => {
                 {...provided.droppableProps}
               /* 不懂 */
               >
+                {/* Draggable组件定义可拖拽元素 */}
                 {
-                  events.find((event) => event.title === currentEvent.title)?.[tag].map((item, index) => {
+                  events.find((event) => event.title === currentEvent.title)?.[tag].map((item, index) => (
 
-                    {/* Draggable组件定义可拖拽元素 */ }
                     <Draggable
                       draggableId={item.id}
                       index={index}
@@ -77,11 +107,11 @@ const Column = ({ tag, currentEvent, events, setEvents }) => {
                             handleRemove={handleRemove}
                             handleUpdate={handleUpdate}
                           />
-                        )
-                      }
+                        )}
                     </Draggable>
-                  })
+                  ))
                 }
+
 
               </div>
             )

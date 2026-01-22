@@ -31,7 +31,14 @@ function App() {
   JSON.parse 用于将JSON格式的字符串转换为JavaScript对象
   */
 
-  const [currentEvent, setCurrentEvent] = useState(events[0]);
+  // const [currentEvent, setCurrentEvent] = useState(events[0]);
+  const [currentEvent, setCurrentEvent] = useState(() => {
+    const storedEvents = localStorage.getItem('events')
+      ? JSON.parse(localStorage.getItem('events'))
+      : initEvent;
+    return storedEvents[0] || initEvent[0];
+  });
+
 
   const updateEvents = useCallback(async () => {
     console.log('update the events');

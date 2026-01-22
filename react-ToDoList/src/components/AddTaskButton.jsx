@@ -1,6 +1,6 @@
 const AddTaskButton = ({ handleClick }) => {
   return (
-    <div className="add-button" onClick={handleClick}>
+    <div className="add-task-button add-button" onClick={handleClick}>
       +
     </div>
   )

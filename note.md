@@ -185,11 +185,11 @@ npm install react@^18.2.0 react-dom@^18.2.0 --save
 
 DragDropContext - 建立一個可 DnD 的範圍。
 
-&nbsp;	onDragStart
+ 	onDragStart
 
-&nbsp;	onDragUpdate
+ 	onDragUpdate
 
-&nbsp;	onDragEnd
+ 	onDragEnd
 
 Droppable - 建立可以被拖曳放入的區塊。
 
@@ -231,11 +231,11 @@ Draggable组件定义可拖拽元素
 
 provided = {
 
-&nbsp; innerRef,
+  innerRef,
 
-&nbsp; draggableProps,
+  draggableProps,
 
-&nbsp; dragHandleProps
+  dragHandleProps
 
 }
 
@@ -299,12 +299,71 @@ data 属性
 
 
 
-* 使用 {} 表示代码块，需要显式使用 return 语句
-* 使用 () 表示隐式返回，直接返回后面的表达式
+* ### ***使用 {} 表示代码块，需要显式使用 return 语句***
+* ### ***使用 () 表示隐式返回，直接返回后面的表达式***
 
 
 
+* # **JSX 注释不能直接写在 () 的最外层**
+
+**.map((item, index) => (**
 
 
 
+**{/\* Draggable组件定义可拖拽元素 \*/ }**
+
+**<Draggable ...>**
+
+&nbsp;   \*\*...\*\*
+
+
+**</Draggable>**
+
+**));**
+
+**因为注释报错**
+
+
+
+#### **DAY5**
+
+
+
+* ### ***使用 {} 表示代码块，需要显式使用 return 语句***
+
+### ***使用 () 表示隐式返回，直接返回后面的表达式***
+
+能用 map / filter / reduce，就不要用 push / splice / sort
+
+
+
+* 删除task时：
+
+&nbsp;   setEvents((prev) =>
+
+&nbsp;     prev.map((event) => {
+
+&nbsp;       if (event.title === currentEvent.title) {
+
+&nbsp;         /\* const taskList = event\[tag];
+
+&nbsp;         const index = taskList.findIndex((item) => item.id === id);
+
+&nbsp;         taskList.splice(index, 1);
+
+&nbsp;         return { ...event, \[tag]: \[...taskList] }; \*/
+
+&nbsp;         return {
+
+&nbsp;           ...event,
+
+&nbsp;           \[tag]: event\[tag].filter(item => item.id !== id)
+
+&nbsp;         };
+
+&nbsp;       } else {
+
+&nbsp;         return event;}}))
+
+新建立数组，而不是在原数组上修改
 

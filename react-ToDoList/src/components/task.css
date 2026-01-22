@@ -23,6 +23,13 @@
   height: 700px;
 }
 
+.add-task-button {
+  width: 300px;
+  font-size: 1.4em;
+  margin-top: 15px;
+
+}
+
 .remove-button {
   font-size: 1.1em;
   font-style: italic;
@@ -36,6 +43,8 @@
   border-radius: 10px;
 
   outline: none;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.184);
 }
 
 .remove-button:hover {
@@ -46,19 +55,74 @@
   /* background-color: #fff; */
   display: flex;
   align-items: flex-start;
-  justify-content: space-evenly;
+  justify-content: space-evenly
+    /* gap: 20px; */
+    /* flex-wrap: wrap;会换行 */
+
 
 }
 
 .column {
-  background-color: #fff;
+  background-color: #ffffff;
   width: 300px;
   padding: 17px 25px;
   font-size: 1.4em;
   /* font-weight: 400; */
   transition: 0.1s;
+  border-radius: 10px;
+
+
+  flex-shrink: 0;
 }
 
+
 .task-container {
-  background-color: #525252;
+  width: 100%;
+  min-height: 20px;
+  max-height: 600px;
+  overflow: auto;
+}
+
+.task {
+  background-color: #faf1dc;
+  padding: 15px;
+  margin-bottom: 18px;
+  cursor: pointer;
+  border: 1px solid #e6b32e;
+  border-radius: 10px;
+
+  position: relative;
+}
+
+.task-name {
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 1.4em;
+  padding-bottom: 4px;
+}
+
+.task-name::before {
+  content: '┃';
+  color: #e6b32e;
+
+}
+
+.task-details {
+  font-size: 0.8em;
+  color: #838383;
+  padding-left: 5px;
+}
+
+.remove-bar::before {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  content: "○";
+  color: #888;
+}
+
+.remove-bar:hover::before {
+  content: "●";
+  color: red;
+  transition: 0.5s;
 }

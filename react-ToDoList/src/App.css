@@ -27,6 +27,8 @@
 
 /* 观看flex视频 */
 .add-button {
+  text-align: center;
+
   width: 80%;
   height: 45px;
   line-height: 45px;
@@ -39,11 +41,12 @@
   */
   color: rgb(0, 0, 0);
   background-color: #f0f0f0;
-  font-size: 2em;
+  font-size: 1.6em;
   cursor: pointer;
   /* transition: 0.5s; */
   border-radius: 10px;
   transition: 0.s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.184);
 
 }
 

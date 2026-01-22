@@ -10,7 +10,6 @@ const Task = ({ name, details, id, provided, handleUpdate, handleRemove }) => {
       <h2 className='task-name over-hide'>{name}</h2>
       <p className='task-details'>{details}</p>
       <div className='remove-bar' onClick={(e) => handleRemove(id, e)}>
-        -
       </div>
     </div>
   );
