@@ -5,11 +5,12 @@ import uuid from 'react-uuid'
 
 const Column = ({ tag, currentEvent, events, setEvents }) => {
 
+  //添加task
   const handleAdd = () => {
     console.log('add task');
     const name = prompt('Enter the task name');
     const details = prompt('Enter details');
-    if (!(name && details)) { return; }
+    if (name === null && details === null) { return; }
 
     setEvents((item) => {
       const arrCopy = [...item];
@@ -35,6 +36,7 @@ const Column = ({ tag, currentEvent, events, setEvents }) => {
     })
 
   }
+  // 删除task
   const handleRemove = (id, e) => {
 
     // 禁止冒泡到上层:修改task
@@ -64,9 +66,41 @@ const Column = ({ tag, currentEvent, events, setEvents }) => {
 
 
   }
-  const handleUpdate = (id) => {
-    console.log('update');
 
+  // 修改task
+  const handleUpdate = (id) => {
+
+    const name = prompt('Update task name');
+    const details = prompt('Update details');
+    if (name === null && details === null) return;
+    setEvents((prev) =>
+      prev.map((event) => {
+        if (event.title !== currentEvent.title) { return event; }
+
+        /*         const taskList = event[tag];
+                const index = taskList.findIndex((event) => event.id === id);
+                const updateTask = {
+                  ...taskList[index],
+                  name: name || taskList[index].name,
+                  details: details || taskList[index].details,
+                }
+                console.log('update the task');
+                return { ...event, [tag]: [...taskList, updateTask] } */
+
+        return {
+          ...event,
+          [tag]: event[tag].map(task => {
+            if (task.id !== id) return task;
+            return {
+              ...task,
+              name: name !== null ? name : task.name,
+              details: details !== null ? details : task.details,
+            }
+          })
+        }
+
+      })
+    )
 
 
   }

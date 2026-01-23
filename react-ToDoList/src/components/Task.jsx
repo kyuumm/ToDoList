@@ -7,12 +7,12 @@ const Task = ({ name, details, id, provided, handleUpdate, handleRemove }) => {
       {...provided.dragHandleProps}
       onClick={() => handleUpdate(id)}
     >
-      <h2 className='task-name over-hide'>{name}</h2>
+      {name && <h2 className='task-name over-hide'>{name}</h2>}
       <p className='task-details'>{details}</p>
       <div className='remove-bar' onClick={(e) => handleRemove(id, e)}>
       </div>
     </div>
   );
 };
-
+//条件渲染标题避免占位
 export default Task;

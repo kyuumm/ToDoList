@@ -21,7 +21,7 @@
 
 .task-box {
   background-color: #f3f3f3;
-  min-width: 1000px;
+  min-width: 1110px;
   flex: 1;
 }
 
@@ -40,16 +40,23 @@
   text-align:center影响水平对齐方式
   */
   color: rgb(0, 0, 0);
-  background-color: #f0f0f0;
+  background-color: #f2f2f2;
   font-size: 1.6em;
   cursor: pointer;
   /* transition: 0.5s; */
   border-radius: 10px;
   transition: 0.s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.184);
-
+  /* box-shadow: 0 0px 5px 2px rgba(0, 0, 0, 0.13); */
+  box-shadow: 0 4px #cccccc;
+  /* border: 2px solid #cccccc; */
 }
 
 .add-button:hover {
-  background-color: #d3d3d3;
+  background-color: #f7f7f7;
+  box-shadow: 0 4px #e5e5e5;
+}
+
+.add-button:active {
+  transform: translateY(4px);
+  box-shadow: none;
 }

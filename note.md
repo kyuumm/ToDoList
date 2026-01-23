@@ -314,7 +314,8 @@ data 属性
 
 **<Draggable ...>**
 
-&nbsp;   \*\*...\*\*
+    \*\*...\*\*
+
 
 
 **</Draggable>**
@@ -339,31 +340,101 @@ data 属性
 
 * 删除task时：
 
-&nbsp;   setEvents((prev) =>
+    setEvents((prev) =>
 
-&nbsp;     prev.map((event) => {
+      prev.map((event) => {
 
-&nbsp;       if (event.title === currentEvent.title) {
+        if (event.title === currentEvent.title) {
 
-&nbsp;         /\* const taskList = event\[tag];
+          /\* const taskList = event\[tag];
 
-&nbsp;         const index = taskList.findIndex((item) => item.id === id);
+          const index = taskList.findIndex((item) => item.id === id);
 
-&nbsp;         taskList.splice(index, 1);
+          taskList.splice(index, 1);
 
-&nbsp;         return { ...event, \[tag]: \[...taskList] }; \*/
+          return { ...event, \[tag]: \[...taskList] }; \*/
 
-&nbsp;         return {
+          return {
 
-&nbsp;           ...event,
+            ...event,
 
-&nbsp;           \[tag]: event\[tag].filter(item => item.id !== id)
+            \[tag]: event\[tag].filter(item => item.id !== id)
 
-&nbsp;         };
+          };
 
-&nbsp;       } else {
+        } else {
 
-&nbsp;         return event;}}))
+          return event;}}))
 
 新建立数组，而不是在原数组上修改
+
+
+
+* flex问题
+
+*我感到非常奇怪，*
+
+*.task-box-body 是父集，设置了flex，column是子集，但是我缩小窗口后column就会紧挨在一起：*
+
+*原因：*
+
+event-bar：flex-shrink：1   ，  min-width：220px
+
+task-box：flex：1（均可），min-width：1070px
+
+column：每个300px宽，共900px
+
+task-box的min-width大于900px，column彼此就会彼此留空，
+
+
+
+* 文字换行
+
+.task-details {
+
+···
+
+  word-wrap: break-word;
+
+}
+
+
+
+### **DAY6**
+
+
+
+* 编辑task   --handleUpdate
+
+
+
+替换 ≠ 创建新对象
+
+替换 = 在数组原位置放入新对象
+
+return {
+
+&nbsp;         ...event,
+
+&nbsp;         \[tag]: event\[tag].map(task => {
+
+&nbsp;           if (task.id !== id) return task;
+
+&nbsp;           return {
+
+&nbsp;             ...task,
+
+&nbsp;             name: name !== null ? name : task.name,
+
+&nbsp;             details: details !== null ? details : task.details,}})}
+
+
+
+* 修改了细节，1：task可单输入/修改  task-name或task-detail，条件渲染task-name
+
+&nbsp;				2：event title设置over-hide
+
+
+
+
 
