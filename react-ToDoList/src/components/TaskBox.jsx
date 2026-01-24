@@ -30,10 +30,53 @@ const TaskBox = ({ events, setEvents, currentEvent, setCurrentEvent }) => {
 
   }, [events, setEvents, currentEvent, setCurrentEvent])
 
-  const handleDragEnd = useCallback(() => {
+  //task 拖动
+  const handleDragEnd = useCallback((result) => {
     console.log('drag end');
+    if (!result.destination) return;
+    const { source, destination, draggableId } = result;
+    console.log(result);
+    console.log(draggableId);
 
-  }, [events, setEvents, currentEvent, setCurrentEvent])
+    const taskCpy = currentEvent[source.droppableId][source.index];
+    // console.log(taskCpy);
+
+
+    setEvents((prev) =>
+      prev.map((event) => {
+        if (event.title !== currentEvent.title) { return event }
+
+        let eventCpy = { ...event };
+        /*         //remove
+                const sourceTaskList = event[source.droppableId];
+                sourceTaskList.splice(source.index, 1);
+                eventCpy = { ...event, [source.droppableId]: sourceTaskList };
+                //add
+                const desTaskList = event[destination.droppableId];
+                desTaskList.splice(destination.index, 0, taskCpy);
+                eventCpy = { ...event, [destination.droppableId]: desTaskList }; 
+                
+                return eventCpy
+                */
+
+        const sourceTaskList = Array.from(event[source.droppableId]);
+        const destList =
+          source.droppableId === destination.droppableId
+            ? sourceTaskList
+            : Array.from(event[destination.droppableId]);
+
+        const [movedTask] = sourceTaskList.splice(source.index, 1);
+
+        destList.splice(destination.index, 0, movedTask);
+
+        return {
+          ...event,
+          [source.droppableId]: sourceTaskList,
+          [destination.droppableId]: destList
+        }
+      })
+    )
+  }, [currentEvent])
 
   return (
     <div className="task-box">

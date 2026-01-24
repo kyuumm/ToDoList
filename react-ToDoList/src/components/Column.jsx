@@ -3,15 +3,27 @@ import AddTaskButton from "./AddTaskButton";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import uuid from 'react-uuid'
 
+const parseInput = (value) => {
+  if (value === null) return null;           // 取消
+  const trimmed = value.trim();
+  return trimmed === "" ? "" : trimmed;      // "" = 无效输入
+};
+
+
 const Column = ({ tag, currentEvent, events, setEvents }) => {
 
   //添加task
   const handleAdd = () => {
-    console.log('add task');
-    const name = prompt('Enter the task name');
-    const details = prompt('Enter details');
-    if (name === null && details === null) { return; }
+    const name = parseInput(prompt('Enter the task name'));
+    if (name === null) return;
 
+    const details = parseInput(prompt('Enter details'));
+    if (details === null) return;
+
+    //两个都无效 → 不添加
+    if (name === "" && details === "") return;
+
+    console.log('add task');
     setEvents((item) => {
       const arrCopy = [...item];
       const index = item.findIndex((event) => event.title == currentEvent.title)
@@ -36,6 +48,52 @@ const Column = ({ tag, currentEvent, events, setEvents }) => {
     })
 
   }
+
+  // 修改task
+  const handleUpdate = (id) => {
+    const name = parseInput(prompt('Update task name'));
+    if (name === null) return;
+
+    const details = parseInput(prompt('Update details'));
+    if (details === null) return;
+
+    //两个都无效 → 不修改
+    if (name === "" && details === "") return;
+
+    // if (name === null && details === null) return;
+    setEvents((prev) =>
+      prev.map((event) => {
+        if (event.title !== currentEvent.title) { return event; }
+
+        /*         const taskList = event[tag];
+                const index = taskList.findIndex((event) => event.id === id);
+                const updateTask = {
+                  ...taskList[index],
+                  name: name || taskList[index].name,
+                  details: details || taskList[index].details,
+                }
+                console.log('update the task');
+                return { ...event, [tag]: [...taskList, updateTask] } */
+
+        return {
+          ...event,
+          [tag]: event[tag].map(task => {
+            if (task.id !== id) return task;
+            return {
+              ...task,
+              name: name ? name : task.name,
+              details: details ? details : task.details,
+            }
+          })
+        }
+
+      })
+    )
+
+
+  }
+
+
   // 删除task
   const handleRemove = (id, e) => {
 
@@ -61,44 +119,6 @@ const Column = ({ tag, currentEvent, events, setEvents }) => {
         } else {
           return event;
         }
-      })
-    )
-
-
-  }
-
-  // 修改task
-  const handleUpdate = (id) => {
-
-    const name = prompt('Update task name');
-    const details = prompt('Update details');
-    if (name === null && details === null) return;
-    setEvents((prev) =>
-      prev.map((event) => {
-        if (event.title !== currentEvent.title) { return event; }
-
-        /*         const taskList = event[tag];
-                const index = taskList.findIndex((event) => event.id === id);
-                const updateTask = {
-                  ...taskList[index],
-                  name: name || taskList[index].name,
-                  details: details || taskList[index].details,
-                }
-                console.log('update the task');
-                return { ...event, [tag]: [...taskList, updateTask] } */
-
-        return {
-          ...event,
-          [tag]: event[tag].map(task => {
-            if (task.id !== id) return task;
-            return {
-              ...task,
-              name: name !== null ? name : task.name,
-              details: details !== null ? details : task.details,
-            }
-          })
-        }
-
       })
     )
 
@@ -145,7 +165,8 @@ const Column = ({ tag, currentEvent, events, setEvents }) => {
                     </Draggable>
                   ))
                 }
-
+                {/* 不懂 */}
+                {provided.placeholder}
 
               </div>
             )

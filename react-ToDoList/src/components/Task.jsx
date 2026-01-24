@@ -1,4 +1,4 @@
-const Task = ({ name, details, id, provided, handleUpdate, handleRemove }) => {
+const Task = ({ name, details, id, provided, snapshot, handleUpdate, handleRemove }) => {
   return (
     <div
       className='task'
@@ -7,8 +7,8 @@ const Task = ({ name, details, id, provided, handleUpdate, handleRemove }) => {
       {...provided.dragHandleProps}
       onClick={() => handleUpdate(id)}
     >
-      {name && <h2 className='task-name over-hide'>{name}</h2>}
-      <p className='task-details'>{details}</p>
+      {name && <h2 className={`${name ? 'task-name' : ''} over-hide`}>{name}</h2>}
+      {details && <p className={`${details ? 'task-details' : ''}`}>{details}</p>}
       <div className='remove-bar' onClick={(e) => handleRemove(id, e)}>
       </div>
     </div>

@@ -414,27 +414,59 @@ task-box的min-width大于900px，column彼此就会彼此留空，
 
 return {
 
-&nbsp;         ...event,
+          ...event,
 
-&nbsp;         \[tag]: event\[tag].map(task => {
+          \[tag]: event\[tag].map(task => {
 
-&nbsp;           if (task.id !== id) return task;
+            if (task.id !== id) return task;
 
-&nbsp;           return {
+            return {
 
-&nbsp;             ...task,
+              ...task,
 
-&nbsp;             name: name !== null ? name : task.name,
+              name: name !== null ? name : task.name,
 
-&nbsp;             details: details !== null ? details : task.details,}})}
+              details: details !== null ? details : task.details,}})}
 
 
 
 * 修改了细节，1：task可单输入/修改  task-name或task-detail，条件渲染task-name
 
-&nbsp;				2：event title设置over-hide
+ 				2：event title设置over-hide
 
 
 
+#### **DAY7**
 
+* 拖拽失效原因：根目录strictMode
+* 写dragEnd函数：失败，原因：原地修改数组，导致undefined
+
+改：拷贝数组      const sourceList = Array.from(event\[source.droppableId]);
+
+* Array.from(x) 的作用：
+
+把“类数组 / 可迭代对象”变成一个全新的数组，它创建一个“新数组引用”
+
+* useCallback：useCallback(fn, deps) 做的事情是：
+
+只在 deps 变化时，重新生成这个函数
+
+如果依赖写错，就会出现两种问题之一：
+
+函数里用到的变量是旧的（闭包问题）
+
+每次 render 都生成新函数（useCallback 失效）
+
+* 修复：单一修改task的name/detail 数据回填
+* 修复：修改/添加task，弹窗第一个取消，第二个不弹出；两个弹窗有一个取消，操作取消
+* 修复：添加空格task/event
+
+
+
+* 修复：添加task：
+* 修复：修改task：
+
+&nbsp;		eg：name有值，trim前和trim后不一致（输入空格）——》不渲染name，值为空
+
+&nbsp;							trim前trim后一致（无输入）——》保持原name值不变
 
